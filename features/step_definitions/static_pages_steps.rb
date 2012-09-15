@@ -10,6 +10,6 @@ Then /^I should see "(.*?)"$/ do |text|
   page.must_have_selector('h1', text: text)
 end
 
-Then /^the title should include "(.*?)"$/ do |text|
-  page.must_have_selector('title', text: "Ruby on Rails Tutorial Sample App | #{text}")
+Then /^the title should be "(.*?)"$/ do |text|
+  page.must_have_selector('title', text: text)
 end
