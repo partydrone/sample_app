@@ -23,5 +23,6 @@ group :test do
   gem 'minitest'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rb-readline'
+  gem 'terminal-notifier-guard'
   gem 'turn'
 end
