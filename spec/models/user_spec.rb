@@ -33,7 +33,7 @@ describe User do
   end
 
   it "rejects an invalid email address" do
-    addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
+    addresses = %w[user@foo,com user_at_foo.org example.user@foo. foo@bar_baz.com foo@bar+baz.com]
     addresses.each do |invalid_email|
       @user.email = invalid_email
       @user.valid?.wont_equal true
