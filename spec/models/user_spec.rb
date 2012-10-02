@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   before do
-    @user = User.new(name: "John Doe", email: "john.doe@example.com", password: "foobar", password_confirmation: "foobar")
+    @user = Factory.build(:user)
   end
 
   it "is a valid object" do
