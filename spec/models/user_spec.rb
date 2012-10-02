@@ -91,4 +91,14 @@ describe User do
     found_user = User.find_by_email(@user.email)
     found_user.authenticate("invalid").must_equal false
   end
+
+  it "has an authentication token" do
+    @user.must_respond_to :auth_token
+  end
+
+  it "generates an auth token before saving" do
+    @user.save
+    found_user = User.find_by_email(@user.email)
+    found_user.auth_token.blank?.wont_equal true
+  end
 end
