@@ -12,6 +12,3 @@ development:
 test: &test
   database: sample_app_test
   <<: *defaults
-
-cucumber:
-  <<: *test

@@ -14,9 +14,7 @@ end
 
 group :test do
   gem 'capybara_minitest_spec'
-  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'guard-cucumber'
   gem 'guard-minitest'
   gem 'guard-pow'
   gem 'miniskirt'
