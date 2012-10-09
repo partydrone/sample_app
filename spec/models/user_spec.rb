@@ -101,4 +101,16 @@ describe User do
     found_user = User.find_by_email(@user.email)
     found_user.auth_token.blank?.wont_equal true
   end
+
+  it "has an admin field" do
+    @user.must_respond_to :admin
+  end
+
+  it "is not an admin by default" do
+    @user.admin?.wont_equal true
+  end
+
+  it "prevents mass-assignment of admin attribute" do
+    proc { User.new(admin: true) }.must_raise ActiveModel::MassAssignmentSecurity::Error
+  end
 end
