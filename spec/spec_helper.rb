@@ -1,8 +1,8 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
+require 'rails/test_help'
 require 'minitest/autorun'
 require 'capybara/rails'
-require 'active_support/testing/setup_and_teardown'
 require 'database_cleaner'
 require 'miniskirt'
 
@@ -26,6 +26,16 @@ class RequestSpec < MiniTest::Spec
   include Capybara::DSL
 end
 MiniTest::Spec.register_spec_type(/integration$/i, RequestSpec)
+
+class ControllerSpec < MiniTest::Spec
+  include Rails.application.routes.url_helpers
+  include ActionController::TestCase::Behavior
+
+  before do
+    @routes = Rails.application.routes
+  end
+end
+MiniTest::Spec.register_spec_type( /Controller$/, ControllerSpec )
 
 class HelperTest < MiniTest::Spec
   include ActionView::TestCase::Behavior

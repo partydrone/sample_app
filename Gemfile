@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'bootstrap-sass'
+gem 'bootstrap-will_paginate'
 gem 'jquery-rails'
 gem 'pg'
 gem 'rails', '3.2.8'
@@ -14,9 +15,7 @@ end
 
 group :test do
   gem 'capybara_minitest_spec'
-  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'guard-cucumber'
   gem 'guard-minitest'
   gem 'guard-pow'
   gem 'miniskirt'
