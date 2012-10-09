@@ -13,7 +13,7 @@ guard 'minitest' do
   watch(%r|^spec/spec_helper\.rb|)    { "spec" }
 
   # Rails 3.2
-  watch(%r|^app/controllers/(.*)\.rb|) { |m| "spec/controllers/#{m[1]}_spec.rb" }
+  # watch(%r|^app/controllers/(.*)\.rb|) { |m| "spec/controllers/#{m[1]}_spec.rb" }
   watch(%r|^app/helpers/(.*)\.rb|)     { |m| "spec/helpers/#{m[1]}_spec.rb" }
   watch(%r|^app/models/(.*)\.rb|)      { |m| "spec/models/#{m[1]}_spec.rb" }  
   
