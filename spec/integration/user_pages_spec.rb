@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'minitest_helper'
 
 describe "User pages integration" do
   describe "index" do

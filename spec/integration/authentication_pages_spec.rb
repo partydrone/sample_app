@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'minitest_helper'
 
 describe "Authentication pages integration" do
   describe "sign in" do

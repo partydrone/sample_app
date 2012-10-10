@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'minitest_helper'
 
 describe ApplicationHelper do
   it "formats a full title when an argument is given" do

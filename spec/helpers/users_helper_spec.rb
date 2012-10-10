@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'minitest_helper'
 
 describe UsersHelper do
   it "returns a Gravatar image tag" do
