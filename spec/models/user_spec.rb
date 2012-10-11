@@ -113,4 +113,25 @@ describe User do
   it "prevents mass-assignment of admin attribute" do
     proc { User.new(admin: true) }.must_raise ActiveModel::MassAssignmentSecurity::Error
   end
+
+  it "has microposts" do
+    @user.must_respond_to :microposts
+  end
+
+  it "lists its microposts newest to oldest" do
+    @user.save
+    @old_micropost = Factory(:micropost, user: @user, created_at: 1.day.ago)
+    @new_micropost = Factory(:micropost, user: @user, created_at: 1.hour.ago)
+    @user.microposts.must_equal [@new_micropost, @old_micropost]
+  end
+
+  it "destroys associated microposts" do
+    @user.save
+    3.times { Factory :micropost, user: @user }
+    microposts = @user.microposts
+    @user.destroy
+    microposts.each do |micropost|
+      Micropost.find(micropost).must_equal nil
+    end
+  end
 end
