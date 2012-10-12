@@ -13,6 +13,19 @@ describe "Static pages integration" do
     it "displays 'Sample App' in the title" do
       page.must_have_selector 'title', text: 'Sample App'
     end
+
+    describe "when signed in" do
+      it "renders the user's feed" do
+        user = Factory(:user)
+        Factory(:micropost, user: user, content: "Lorem ipsum")
+        Factory(:micropost, user: user, content: "Dolor sit amet")
+        sign_in user
+        visit root_path
+        user.feed.each do |item|
+          page.must_have_selector "li##{item.id}", text: item.content
+        end
+      end
+    end
   end
 
   describe "Help page" do

@@ -120,9 +120,9 @@ describe User do
 
   it "lists its microposts newest to oldest" do
     @user.save
-    @old_micropost = Factory(:micropost, user: @user, created_at: 1.day.ago)
-    @new_micropost = Factory(:micropost, user: @user, created_at: 1.hour.ago)
-    @user.microposts.must_equal [@new_micropost, @old_micropost]
+    old_micropost = Factory(:micropost, user: @user, created_at: 1.day.ago)
+    new_micropost = Factory(:micropost, user: @user, created_at: 1.hour.ago)
+    @user.microposts.must_equal [new_micropost, old_micropost]
   end
 
   it "destroys associated microposts" do
@@ -133,5 +133,23 @@ describe User do
     microposts.each do |micropost|
       Micropost.find(micropost).must_be_nil
     end
+  end
+
+  it "includes old micropost in feed" do
+    @user.save
+    old_micropost = Factory(:micropost, user: @user, created_at: 1.day.ago)
+    @user.feed.must_include old_micropost
+  end
+
+  it "includes new micropost in feed" do
+    @user.save
+    new_micropost = Factory(:micropost, user: @user, created_at: 1.hour.ago)
+    @user.feed.must_include new_micropost
+  end
+
+  it "doesn't include unfollowed user posts" do
+    @user.save
+    post = Factory(:micropost)
+    @user.feed.wont_include post
   end
 end
