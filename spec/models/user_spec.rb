@@ -131,7 +131,7 @@ describe User do
     microposts = @user.microposts
     @user.destroy
     microposts.each do |micropost|
-      Micropost.find(micropost).must_equal nil
+      Micropost.find(micropost).must_be_nil
     end
   end
 end

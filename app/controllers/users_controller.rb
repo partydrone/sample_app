@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :find_user
-  before_filter :signed_in_user, only: [:index, :edit, :update]
+  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_filter :correct_user, only: [:edit, :update]
   before_filter :admin_user, only: :destroy
 
@@ -50,13 +50,6 @@ private
 
   def find_user
     @user = User.find(params[:id]) if params[:id]
-  end
-
-  def signed_in_user
-    unless current_user
-      store_location
-      redirect_to signin_path, notice: 'Please sign in.'
-    end
   end
 
   def correct_user
