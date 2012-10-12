@@ -21,11 +21,11 @@ class MiniTest::Spec
   end
 end
 
-class RequestSpec < MiniTest::Spec
+class AcceptanceSpec < MiniTest::Spec
   include Rails.application.routes.url_helpers
   include Capybara::DSL
 end
-MiniTest::Spec.register_spec_type(/integration$/i, RequestSpec)
+MiniTest::Spec.register_spec_type(/integration$/i, AcceptanceSpec)
 
 class ControllerSpec < MiniTest::Spec
   include Rails.application.routes.url_helpers

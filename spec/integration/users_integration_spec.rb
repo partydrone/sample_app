@@ -121,6 +121,8 @@ describe "User pages integration" do
   describe "Profile page" do
     before do
       @user = Factory(:user, name: "Barney Rubble")
+      @post1 = Factory(:micropost, user: @user, content: 'Foo')
+      @post2 = Factory(:micropost, user: @user, content: 'Bibble')
       visit user_path(@user)
     end
 
@@ -130,6 +132,24 @@ describe "User pages integration" do
 
     it "displays the user name in the title" do
       page.must_have_selector "title", text: @user.name
+    end
+
+    it "shows the first micropost" do
+      page.must_have_content @post1.content
+    end
+
+    it "shows a second micropost" do
+      page.must_have_content @post2.content
+    end
+
+    it "shows the number of microposts" do
+      page.must_have_content "#{@user.microposts.count}"
+    end
+
+    it "shows pagination controls for microposts" do
+      skip "complete as exercise"
+      50.times { Factory(:micropost, user: @user) }
+      page.must_have_selector 'div.pagination'
     end
   end
 
