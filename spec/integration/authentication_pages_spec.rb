@@ -101,14 +101,6 @@ describe "Authentication pages integration" do
           end
         end
 
-        describe "submitting to the update action" do
-          it "redirects to the sign in page" do
-            skip "TODO: send PUT request"
-            put_via_redirect user_path(@user)
-            response.must_redirect_to signin_path
-          end
-        end
-
         describe "visiting the index page" do
           before do
             visit users_path
@@ -118,6 +110,10 @@ describe "Authentication pages integration" do
             page.must_have_selector 'title', text: 'Sign In'
           end
         end
+      end
+
+      describe "in the microposts controller" do
+        
       end
     end
 
@@ -135,28 +131,6 @@ describe "Authentication pages integration" do
 
         it "doesn't show the edit page" do
           page.wont_have_selector 'title', text: 'Edit Profile'
-        end
-      end
-
-      describe "submitting to the update action" do
-        it "redirects to the sign in page" do
-          skip "TODO: send PUT request"
-          put_via_redirect user_path(@wrong_user)
-          response.must_redirect_to root_path
-        end
-      end
-    end
-
-    describe "for non-admin users" do
-      before do
-        @user = Factory(:user)
-        sign_in @user
-      end
-
-      describe "submitting to the destroy action" do
-        it "redirects to the sign in page" do
-          skip "TODO: send DELETE request"
-          delete_via_redirect root_path
         end
       end
     end
