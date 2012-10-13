@@ -59,6 +59,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faker (1.1.2)
+      i18n (~> 0.5)
     ffi (1.1.5)
     guard (1.4.0)
       listen (>= 0.4.2)
@@ -157,6 +159,7 @@ DEPENDENCIES
   capybara_minitest_spec
   coffee-rails (~> 3.2.1)
   database_cleaner
+  faker
   guard-minitest
   guard-pow
   jquery-rails
