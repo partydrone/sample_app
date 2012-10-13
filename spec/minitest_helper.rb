@@ -43,6 +43,6 @@ end
 MiniTest::Spec.register_spec_type(/Helper$/, HelperTest)
 
 Turn.config do |c|
-  c.format  = :outline
+  c.format  = :dot
   c.natural = true
 end
