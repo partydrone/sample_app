@@ -152,4 +152,48 @@ describe User do
     post = Factory(:micropost)
     @user.feed.wont_include post
   end
+
+  it "has relationships" do
+    @user.must_respond_to :relationships
+  end
+
+  it "has users it follows" do
+    @user.must_respond_to :followed_users
+  end
+
+  it "follows a user" do
+    @user.save
+    other_user = Factory(:user)
+    @user.follow!(other_user).must_be_kind_of Relationship
+  end
+
+  it "knows if following a user" do
+    @user.save
+    other_user = Factory(:user)
+    @user.follow!(other_user)
+    @user.following?(other_user).must_equal true
+    # Included as part of following tutorial, but either unnecessary or should be in own test
+    @user.followed_users.must_include other_user
+  end
+
+  it "unfollows a user" do
+    @user.save
+    other_user = Factory(:user)
+    @user.follow!(other_user)
+    @user.unfollow!(other_user)
+    @user.following?(other_user).wont_equal true
+    # Included as part of following tutorial, but either unnecessary or should be in own test
+    @user.followed_users.wont_include other_user
+  end
+
+  it "has reverse relationships" do
+    @user.must_respond_to :reverse_relationships
+  end
+
+  it "has users that follow it" do
+    @user.save
+    other_user = Factory(:user)
+    other_user.follow!(@user)
+    @user.followers.must_include other_user
+  end
 end
