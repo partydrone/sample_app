@@ -147,10 +147,21 @@ describe User do
     @user.feed.must_include new_micropost
   end
 
-  it "doesn't include unfollowed user posts" do
+  it "doesn't include unfollowed user microposts" do
     @user.save
-    post = Factory(:micropost)
-    @user.feed.wont_include post
+    micropost = Factory(:micropost)
+    @user.feed.wont_include micropost
+  end
+
+  it "includes followed user microposts" do
+    @user.save
+    unfollowed_post = Factory(:micropost)
+    followed_user = Factory(:user)
+    @user.follow!(followed_user)
+    3.times { followed_user.microposts.create!(content: 'Lorem ipsum dolor sit amet.')}
+    followed_user.microposts.each do |micropost|
+      @user.feed.must_include micropost
+    end
   end
 
   it "has relationships" do
