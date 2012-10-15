@@ -15,14 +15,33 @@ describe "Static pages integration" do
     end
 
     describe "when signed in" do
-      it "renders the user's feed" do
-        user = Factory(:user)
-        Factory(:micropost, user: user, content: "Lorem ipsum")
-        Factory(:micropost, user: user, content: "Dolor sit amet")
-        sign_in user
+      before do
+        @user = Factory(:user)
+        Factory(:micropost, user: @user, content: "Lorem ipsum")
+        Factory(:micropost, user: @user, content: "Dolor sit amet")
+        sign_in @user
         visit root_path
-        user.feed.each do |item|
+      end
+
+      it "renders the user's feed" do
+        @user.feed.each do |item|
           page.must_have_selector "li##{item.id}", text: item.content
+        end
+      end
+
+      describe "follower/following counts" do
+        before do
+          @other_user = Factory(:user)
+          @other_user.follow!(@user)
+          visit root_path
+        end
+
+        it "displays users following" do
+          page.must_have_link '0 following', href: following_user_path(@user)
+        end
+
+        it "displays followers" do
+          page.must_have_link '1 follower', href: followers_user_path(@user)
         end
       end
     end

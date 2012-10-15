@@ -25,3 +25,5 @@ group :test do
   gem 'terminal-notifier-guard'
   gem 'turn'
 end
+
+gem 'faker', group: :development

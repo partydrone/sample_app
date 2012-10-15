@@ -151,6 +151,60 @@ describe "User pages integration" do
       50.times { Factory(:micropost, user: @user) }
       page.must_have_selector 'div.pagination'
     end
+
+    describe "follow/unfollow buttons" do
+      before do
+        @other_user = Factory(:user)
+        sign_in @user
+      end
+
+      describe "following a user" do
+        before do
+          visit user_path(@other_user)
+        end
+
+        it "increases the followed user count" do
+          count = @user.followed_users.count
+          click_button 'Follow'
+          @user.followed_users.count.must_equal count + 1
+        end
+
+        it "increases the other user's followers count" do
+          count = @other_user.followers.count
+          click_button 'Follow'
+          @other_user.followers.count.must_equal count + 1
+        end
+
+        it "toggles the follow button" do
+          click_button 'Follow'
+          page.must_have_selector 'input', value: 'Unfollow'
+        end
+      end
+
+      describe "unfollowing a user" do
+        before do
+          @user.follow! @other_user
+          visit user_path(@other_user)
+        end
+
+        it "decreases the followed user count" do
+          count = @user.followed_users.count
+          click_button 'Unfollow'
+          @user.followed_users.count.must_equal count - 1
+        end
+
+        it "decreases the other user's followers count" do
+          count = @other_user.followers.count
+          click_button 'Unfollow'
+          @other_user.followers.count.must_equal count - 1
+        end
+
+        it "toggles the follow button" do
+          click_button 'Unfollow'
+          page.must_have_selector 'input', value: 'Follow'
+        end
+      end
+    end
   end
 
   describe "Edit user" do
@@ -215,6 +269,52 @@ describe "User pages integration" do
 
       it "displays errors" do
         page.must_have_content "error"
+      end
+    end
+  end
+
+  describe "following/followers" do
+    before do
+      @user       = Factory(:user)
+      @other_user = Factory(:user)
+      @user.follow! @other_user
+    end
+
+    describe "followed users (following)" do
+      before do
+        sign_in @user
+        visit following_user_path(@user)
+      end
+
+      it "displays a custom title" do
+        page.must_have_selector 'title', text: 'Following'
+      end
+
+      it "displays a custom heading" do
+        page.must_have_selector 'h3', text: 'Following'
+      end
+
+      it "links to other user's profile" do
+        page.must_have_link @other_user.name, href: user_path(@other_user)
+      end
+    end
+
+    describe "followers" do
+      before do
+        sign_in @other_user
+        visit followers_user_path(@other_user)
+      end
+
+      it "displays a custom title" do
+        page.must_have_selector 'title', text: 'Followers'
+      end
+
+      it "displays a custom heading" do
+        page.must_have_selector 'h3', text: 'Followers'
+      end
+
+      it "links to other user's profile" do
+        page.must_have_link @user.name, href: user_path(@user)
       end
     end
   end

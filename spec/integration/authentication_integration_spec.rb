@@ -110,10 +110,26 @@ describe "Authentication pages integration" do
             page.must_have_selector 'title', text: 'Sign In'
           end
         end
-      end
 
-      describe "in the microposts controller" do
-        
+        describe "visiting the following page" do
+          before do
+            visit following_user_path(@user)
+          end
+
+          it "requires sign in" do
+            page.must_have_selector 'title', text: 'Sign In'
+          end
+        end
+
+        describe "visiting the followers page" do
+          before do
+            visit followers_user_path(@user)
+          end
+
+          it "requires sign in" do
+            page.must_have_selector 'title', text: 'Sign In'
+          end
+        end
       end
     end
 
