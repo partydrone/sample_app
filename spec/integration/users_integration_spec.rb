@@ -147,8 +147,8 @@ describe "User pages integration" do
     end
 
     it "shows pagination controls for microposts" do
-      skip "complete as exercise"
       50.times { Factory(:micropost, user: @user) }
+      visit user_path(@user)
       page.must_have_selector 'div.pagination'
     end
 
