@@ -28,8 +28,26 @@ GEM
     activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.3.2)
+    ansi (1.4.3)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
+    bootstrap-sass (2.1.0.0)
+    bootstrap-will_paginate (0.0.9)
+      will_paginate
     builder (3.0.3)
+    capybara (1.1.2)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      selenium-webdriver (~> 2.0)
+      xpath (~> 0.1.4)
+    capybara_minitest_spec (0.2.2)
+      capybara
+      minitest (>= 2.0)
+    childprocess (0.3.5)
+      ffi (~> 1.0, >= 1.0.6)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -37,22 +55,40 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    database_cleaner (0.8.0)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faker (1.1.2)
+      i18n (~> 0.5)
+    ffi (1.1.5)
+    guard (1.4.0)
+      listen (>= 0.4.2)
+      thor (>= 0.14.6)
+    guard-minitest (0.5.0)
+      guard (>= 0.4)
+    guard-pow (1.0.0)
+      guard (>= 1.1)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
-    jquery-rails (2.1.2)
+    jquery-rails (2.1.3)
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.7.5)
+    libwebsocket (0.1.5)
+      addressable
+    listen (0.5.3)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
+    miniskirt (1.2.1)
+      activesupport
+    minitest (4.1.0)
     multi_json (1.3.6)
+    nokogiri (1.5.5)
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -60,7 +96,7 @@ GEM
       rack (>= 0.4)
     rack-ssl (1.3.2)
       rack
-    rack-test (0.6.1)
+    rack-test (0.6.2)
       rack (>= 1.0)
     rails (3.2.8)
       actionmailer (= 3.2.8)
@@ -78,34 +114,62 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (0.9.2.2)
+    rb-fsevent (0.9.2)
+    rb-readline (0.4.2)
     rdoc (3.12)
       json (~> 1.4)
+    rubyzip (0.9.9)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    selenium-webdriver (2.25.0)
+      childprocess (>= 0.2.5)
+      libwebsocket (~> 0.1.3)
+      multi_json (~> 1.0)
+      rubyzip
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    terminal-notifier-guard (1.5.3)
     thor (0.16.0)
     tilt (1.3.3)
-    treetop (1.4.10)
+    treetop (1.4.11)
       polyglot
       polyglot (>= 0.3.1)
+    turn (0.9.6)
+      ansi
     tzinfo (0.3.33)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    will_paginate (3.0.3)
+    xpath (0.1.4)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby (~> 3.0.0)
+  bootstrap-sass
+  bootstrap-will_paginate
+  capybara_minitest_spec
   coffee-rails (~> 3.2.1)
+  database_cleaner
+  faker
+  guard-minitest
+  guard-pow
   jquery-rails
+  miniskirt
+  minitest
   pg
   rails (= 3.2.8)
+  rb-fsevent (~> 0.9.1)
+  rb-readline
   sass-rails (~> 3.2.3)
+  terminal-notifier-guard
+  turn
   uglifier (>= 1.0.3)
